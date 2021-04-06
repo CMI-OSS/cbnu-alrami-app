@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MessagePage extends StatelessWidget {
-  const MessagePage({Key key}) : super(key: key);
+class MessageBox extends StatelessWidget {
+  const MessageBox({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), backgroundColor: Colors.white10);
+    return Container(
+      color: Colors.red,
+    );
   }
 }

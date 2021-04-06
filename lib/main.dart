@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(),
         body: Obx(() {
           if (NotificationController.to.message.isNotEmpty)
-            return MessagePage(); // 원하는 페이지 or 이벤트 처리
+            return MessageBox(); // 원하는 페이지 or 이벤트 처리
           return Container();
         }),
       ),
