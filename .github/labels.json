@@ -1,0 +1,72 @@
+[
+    {
+        "name": "👽 API",
+        "color": "D4C5F9",
+        "description": "서버 API 통신"
+    },
+    {
+        "name": "🐛 Bug",
+        "color": "d73a4a",
+        "description": "Something isn't working"
+    },
+    {
+        "name": "🌐 Deploy",
+        "color": "d876e3",
+        "description": "배포 관련"
+    },
+    {
+        "name": "📖 Docs",
+        "color": "0075ca",
+        "description": "문서 작성 및 수정(Readme 등)"
+    },
+    {
+        "name": "✨ Feature",
+        "color": "a2eeef",
+        "description": "기능 개발"
+    },
+    {
+        "name": "⭐️Important",
+        "color": "FFDC00",
+        "description": "중요"
+    },
+    {
+        "name": "📱 Mobile",
+        "color": "bfe5bf",
+        "description": "모바일 작업(React Native)"
+    },
+    {
+        "name": "🙋🏻‍♂️ Question",
+        "color": "9ED447",
+        "description": "Further information is requested"
+    },
+    {
+        "name": "♻︎ Refactor",
+        "color": "f29a4e",
+        "description": "코드 리팩토링"
+    },
+    {
+        "name": "👋 self-approve",
+        "color": "eeeeee",
+        "description": "코드리뷰를 skip"
+    },
+    {
+        "name": "⚙️ Setting",
+        "color": "3BDAE0",
+        "description": "개발 환경 세팅 작업"
+    },
+    {
+        "name": "🎨 code style",
+        "color": "FEF2C0",
+        "description": "코딩 컨벤션/스타일"
+    },
+    {
+        "name": "✅ Test",
+        "color": "ccffc4",
+        "description": "test 관련(storybook, jest...)"
+    },
+    {
+        "name": "💄 UI/UX",
+        "color": "FEF2C0",
+        "description": "마크업 & 스타일링"
+    }
+]
