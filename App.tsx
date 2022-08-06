@@ -1,22 +1,46 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
+import React, {useRef, useState} from 'react';
+import {Text, View} from 'react-native';
+import WebView from 'react-native-webview';
 
-import React from 'react';
-import { WebView } from 'react-native-webview';
+// const Stack = createNativeStackNavigator();
+const uri = 'https://dev-mobile.cmi.kro.kr/home';
 
 const App = () => {
+  let webviewRef = useRef();
+  const [isLoading, setLoading] = useState(true);
+
+  const handleSetRef = (_ref: React.MutableRefObject<undefined>) => {
+    webviewRef = _ref;
+  };
+
+  const handleOnMessage = ({nativeEvent: {data}}) => {
+    console.log(data);
+  };
+
+  const handleEndLoading = () => {
+    setLoading(false);
+    console.log('로딩 끝');
+    webviewRef.postMessage('js 로딩 완료시 webview로 정보를 보내는 곳');
+  };
+
   return (
-       <WebView
-        source={{uri: 'https://dev-mobile.cmi.kro.kr/map'}}
-        style={{marginTop: 30}}
+    <>
+      {isLoading && (
+        <View
+          style={{
+            backgroundColor: 'black',
+            height: '100%',
+          }}>
+          <Text>Home Screen</Text>
+        </View>
+      )}
+      <WebView
+        onLoadEnd={handleEndLoading}
+        onMessage={handleOnMessage}
+        ref={handleSetRef}
+        source={{uri}}
       />
+    </>
   );
 };
 
