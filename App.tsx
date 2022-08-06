@@ -1,15 +1,15 @@
 import React, {useRef, useState} from 'react';
 import {Text, View} from 'react-native';
 import WebView from 'react-native-webview';
+import rnUuid from 'react-native-uuid';
 
-// const Stack = createNativeStackNavigator();
 const uri = 'https://dev-mobile.cmi.kro.kr/home';
 
 const App = () => {
-  let webviewRef = useRef();
+  let webviewRef = useRef<WebView>();
   const [isLoading, setLoading] = useState(true);
-
-  const handleSetRef = (_ref: React.MutableRefObject<undefined>) => {
+  const uuid = rnUuid.v4();
+  const handleSetRef = (_ref: React.MutableRefObject<WebView>) => {
     webviewRef = _ref;
   };
 
@@ -19,8 +19,9 @@ const App = () => {
 
   const handleEndLoading = () => {
     setLoading(false);
+    console.log(uuid);
     console.log('로딩 끝');
-    webviewRef.postMessage('js 로딩 완료시 webview로 정보를 보내는 곳');
+    webviewRef.postMessage(uuid + '');
   };
 
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Text>Home Screen</Text>
         </View>
       )}
+      {!isLoading && <Text>{uuid}</Text>}
       <WebView
         onLoadEnd={handleEndLoading}
         onMessage={handleOnMessage}
