@@ -1,29 +1,34 @@
-import React, {useRef, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useRef, useState, RefObject} from 'react';
+import {Alert, Text, View} from 'react-native';
 import WebView from 'react-native-webview';
 import rnUuid from 'react-native-uuid';
 
-const uri = 'https://dev-mobile.cmi.kro.kr/home';
+const uri = 'http://localhost:3000/home';
+export interface Message {
+  type: string;
+  payload: string | null;
+}
+
+export interface SendMessage extends Message {
+  webViewRef: RefObject<WebView<{}>>;
+}
 
 const App = () => {
-  let webviewRef = useRef<WebView>();
+  let webviewRef = useRef<WebView>(null);
   const [isLoading, setLoading] = useState(true);
   const uuid = rnUuid.v4();
-  const handleSetRef = (_ref: React.MutableRefObject<WebView>) => {
-    webviewRef = _ref;
+
+  const handleOnLoad = () => {
+    if(webviewRef.current) {
+      webviewRef?.current?.postMessage(JSON.stringify({
+        data: uuid + ''
+      }));
+    }
   };
 
-  const handleOnMessage = ({nativeEvent: {data}}) => {
-    console.log(data);
-  };
-
-  const handleEndLoading = () => {
+  const handleOnEnd = () => {
     setLoading(false);
-    console.log(uuid);
-    console.log('로딩 끝');
-    webviewRef.postMessage(uuid + '');
-  };
-
+  }
   return (
     <>
       {isLoading && (
@@ -35,11 +40,12 @@ const App = () => {
           <Text>Home Screen</Text>
         </View>
       )}
-      {!isLoading && <Text>{uuid}</Text>}
+      {!isLoading && <Text style={{ color: 'red'}}>{uuid}</Text>}
       <WebView
-        onLoadEnd={handleEndLoading}
-        onMessage={handleOnMessage}
-        ref={handleSetRef}
+        onLoadProgress={handleOnLoad}
+        onLoadEnd={handleOnEnd}
+        javaScriptEnabled={true}
+        ref={webviewRef}
         source={{uri}}
       />
     </>
@@ -47,3 +53,7 @@ const App = () => {
 };
 
 export default App;
+function postMessage(arg0: string): string {
+  throw new Error('Function not implemented.');
+}
+
