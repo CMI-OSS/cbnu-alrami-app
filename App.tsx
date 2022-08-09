@@ -1,22 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
+import React, {useRef, useState, RefObject} from 'react';
+import {Text, View} from 'react-native';
+import WebView from 'react-native-webview';
+import rnUuid from 'react-native-uuid';
 
-import React from 'react';
-import { WebView } from 'react-native-webview';
+const uri = 'http://10.0.2.2:3000/home'; // android uri
+export interface Message {
+  type: string;
+  payload: string | null;
+}
+
+export interface SendMessage extends Message {
+  webViewRef: RefObject<WebView<{}>>;
+}
 
 const App = () => {
+  let webviewRef = useRef<WebView>(null);
+  const [isLoading, setLoading] = useState(true);
+  const uuid = rnUuid.v4();
+
+  const sendUuid = () => {
+    if (webviewRef.current) {
+      console.log(uuid);
+      webviewRef?.current?.postMessage(
+        JSON.stringify({
+          data: uuid + '',
+        }),
+      );
+    }
+  };
+
+  const handleOnEnd = () => {
+    sendUuid();
+    setLoading(false);
+  };
   return (
-       <WebView
-        source={{uri: 'https://dev-mobile.cmi.kro.kr/map'}}
-        style={{marginTop: 30}}
+    <>
+      {isLoading && (
+        <View
+          style={{
+            backgroundColor: 'black',
+            height: '100%',
+          }}>
+          <Text>Home Screen</Text>
+        </View>
+      )}
+      {!isLoading && <Text style={{color: 'red'}}>{uuid}</Text>}
+      <WebView
+        onLoadEnd={handleOnEnd}
+        javaScriptEnabled={true}
+        ref={webviewRef}
+        source={{uri}}
       />
+    </>
   );
 };
 
