@@ -3,15 +3,8 @@ import {Text, View} from 'react-native';
 import WebView from 'react-native-webview';
 import rnUuid from 'react-native-uuid';
 
-const uri = 'http://10.0.2.2:3000/home'; // android uri
-export interface Message {
-  type: string;
-  payload: string | null;
-}
-
-export interface SendMessage extends Message {
-  webViewRef: RefObject<WebView<{}>>;
-}
+// const uri = 'http://10.0.2.2:3000/home'; // android uri
+const uri = 'http://localhost:3000/home';
 
 const App = () => {
   let webviewRef = useRef<WebView>(null);
