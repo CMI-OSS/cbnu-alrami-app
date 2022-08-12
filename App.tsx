@@ -2,6 +2,8 @@ import React, {useRef, useState, RefObject} from 'react';
 import {Text, View} from 'react-native';
 import WebView from 'react-native-webview';
 import rnUuid from 'react-native-uuid';
+import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
 
 // const uri = 'http://10.0.2.2:3000/home'; // android uri
 const uri = 'http://localhost:3000/home';
@@ -22,9 +24,17 @@ const App = () => {
     }
   };
 
-  const handleOnEnd = () => {
+  const handleOnEnd = async () => {
     sendUuid();
     setLoading(false);
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
   };
   return (
     <>
