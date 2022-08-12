@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "react": "18.0.0",
-    "react-native": "0.69.3",
-    "react-native-uuid": "^2.0.1"
+    "react-native-uuid": "^2.0.1",
+    "@react-native-firebase/app": "^8.4.6",
+    "@react-native-firebase/messaging": "^7.9.1",
+    "react-native": "0.69.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -21,7 +23,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
-    "@types/react-native": "^0.69.4",
+    "@types/react-native": "^0.69.3",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
