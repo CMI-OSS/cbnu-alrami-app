@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "185064806197",
+    "project_id": "cmi-app-b3b92",
+    "storage_bucket": "cmi-app-b3b92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185064806197:android:db20988c57730b7e119e7c",
+        "android_client_info": {
+          "package_name": "com.cbnu_alrami.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185064806197-8l38di4bmb7d4i3r5glp7gfbh8abcfen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVVggcx6gKb-qlWkfDKW1WJ6Qcf6LpTvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185064806197-8l38di4bmb7d4i3r5glp7gfbh8abcfen.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "185064806197-9u5nipdg5b2ef6nehsh5dh29ongp648v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cbnu-alarmi.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
