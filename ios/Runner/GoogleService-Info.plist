@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>868995065243-3dp8or4cjhndhdt11m2bjc0f80rjbdmp.apps.googleusercontent.com</string>
+	<string>185064806197-2k601j9ilfbvct8lg4dilj8p9kisq6i4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.868995065243-3dp8or4cjhndhdt11m2bjc0f80rjbdmp</string>
+	<string>com.googleusercontent.apps.185064806197-2k601j9ilfbvct8lg4dilj8p9kisq6i4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAXlEFzKMA0UIHh0-vDJSpQoVSoQ3meu8U</string>
+	<string>AIzaSyDl8gjzcnKvMyguniIQ7Vw_JyvofDYENwA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>868995065243</string>
+	<string>185064806197</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.flutterChatSample</string>
+	<string>com.cbnu-alrami.app</string>
 	<key>PROJECT_ID</key>
-	<string>flutterchatsample-8b28e</string>
+	<string>cmi-app-b3b92</string>
 	<key>STORAGE_BUCKET</key>
-	<string>flutterchatsample-8b28e.appspot.com</string>
+	<string>cmi-app-b3b92.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:868995065243:ios:fd70c4b4425eab4c762d3e</string>
+	<string>1:185064806197:ios:f217d02b2369673d119e7c</string>
 </dict>
 </plist>

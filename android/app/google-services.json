@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "868995065243",
-    "project_id": "flutterchatsample-8b28e",
-    "storage_bucket": "flutterchatsample-8b28e.appspot.com"
+    "project_number": "185064806197",
+    "project_id": "cmi-app-b3b92",
+    "storage_bucket": "cmi-app-b3b92.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:868995065243:android:501b1a23efc82374762d3e",
+        "mobilesdk_app_id": "1:185064806197:android:db20988c57730b7e119e7c",
         "android_client_info": {
-          "package_name": "com.example.flutter_chat_sample"
+          "package_name": "com.cbnu_alrami.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "868995065243-ev4a809t2e7j3d6imb9na1ofkebbllg7.apps.googleusercontent.com",
+          "client_id": "185064806197-8l38di4bmb7d4i3r5glp7gfbh8abcfen.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBRaUR-hHX5ITHIg8I_sWDtjhcv8EqRSZ8"
+          "current_key": "AIzaSyAVVggcx6gKb-qlWkfDKW1WJ6Qcf6LpTvE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "868995065243-ev4a809t2e7j3d6imb9na1ofkebbllg7.apps.googleusercontent.com",
+              "client_id": "185064806197-8l38di4bmb7d4i3r5glp7gfbh8abcfen.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "868995065243-3dp8or4cjhndhdt11m2bjc0f80rjbdmp.apps.googleusercontent.com",
+              "client_id": "185064806197-9u5nipdg5b2ef6nehsh5dh29ongp648v.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.flutterChatSample"
+                "bundle_id": "com.cbnu-alrami.app"
               }
             }
           ]
