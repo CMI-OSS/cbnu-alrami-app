@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
         },
       ),
       home: Scaffold(
-        appBar: AppBar(),
         body: Obx(() {
           if (NotificationController.to.message.isNotEmpty)
             return MessageBox(); // 원하는 페이지 or 이벤트 처리
