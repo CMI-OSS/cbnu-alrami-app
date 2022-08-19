@@ -7,7 +7,7 @@ class CbnuAlramiWebview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const WebView(
-      initialUrl: 'http://10.0.2.2:3000/home', // 'https://dev-mobile.cmi.kro.kr'
+      initialUrl: 'https://dev-mobile.cmi.kro.kr/home', // 'https://dev-mobile.cmi.kro.kr'
       javascriptMode: JavascriptMode.unrestricted,
     );
   }
