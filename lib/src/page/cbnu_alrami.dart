@@ -28,7 +28,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
     NotificationController nc = new NotificationController();
 
     return WebView(
-      initialUrl: 'http:10.0.2.2:3000/home', // 'https://dev-mobile.cmi.kro.kr'
+      initialUrl: 'https://dev-mobile.cmi.kro.kr', // 'https://dev-mobile.cmi.kro.kr'
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webviewController)  {
         _controller.complete(webviewController);
