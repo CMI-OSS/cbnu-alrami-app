@@ -1,12 +1,14 @@
 import 'package:cbnu_alrami_app/src/page/cbnu_alrami.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:cbnu_alrami_app/src/app.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:cbnu_alrami_app/src/page/message_page.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

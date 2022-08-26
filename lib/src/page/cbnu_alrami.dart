@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -39,8 +39,9 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
       },
       onPageFinished: (String url) async {
         dynamic token = await nc.getToken();
-        _webViewController.evaluateJavascript('localStorage.setItem("token", "${token}");');
+        _webViewController.runJavascript('localStorage.setItem("token", "${token}");');
       },
+      geolocationEnabled: true,
     );
   }
   JavascriptChannel _baseJavascript(BuildContext context) {
