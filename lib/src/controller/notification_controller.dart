@@ -1,23 +1,26 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class NotificationController extends GetxController {
   static NotificationController get to => Get.find();
   FirebaseMessaging _messaging = FirebaseMessaging();
   RxMap<String, dynamic> message = Map<String, dynamic>().obs;
+  WebViewController controller;
 
   @override
   void onInit() {
     _initNotification();
-    _getToken();
+    getToken();
     super.onInit();
   }
 
-  Future<void> _getToken() async {
+  Future<String> getToken() async {
     try {
       String token = await _messaging.getToken();
-      print(token);
+      return token;
+
     } catch (e) {}
   }
 
