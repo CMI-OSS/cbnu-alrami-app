@@ -46,9 +46,9 @@ class NotificationController extends GetxController {
       print("onMessageOpenedApp: $message");
     });
 
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) {
+    /* FirebaseMessaging.onBackgroundMessage((RemoteMessage message) {
       _actionOnNotification(message);
-    });
+    }); */
   }
 
   void _actionOnNotification(Map<String, dynamic> messageMap) {
