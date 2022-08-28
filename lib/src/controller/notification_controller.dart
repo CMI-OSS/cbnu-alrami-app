@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
 class NotificationController extends GetxController {
   static NotificationController get to => Get.find();
@@ -26,7 +28,7 @@ class NotificationController extends GetxController {
     } catch (e) {}
   }
 
-  Future onBackgroundHandler(RemoteMessage message) async {
+  Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
     print("onBackgroundMessage: ${message.data}");
     return Future.value();
   }
@@ -95,11 +97,5 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print("onMessageOpenedApp: $message");
     });
-
-     FirebaseMessaging.onBackgroundMessage(onBackgroundHandler);
-  }
-
-  void _actionOnNotification(Map<String, dynamic> messageMap) {
-    message(messageMap);
   }
 }

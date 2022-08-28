@@ -5,10 +5,17 @@ import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:cbnu_alrami_app/src/page/message_page.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_webview_pro/webview_flutter.dart';
+
+Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
+  print("onBackgroundMessage: ${message.data}");
+  return Future.value();
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(onBackgroundHandler);
   runApp(MyApp());
 }
 
