@@ -4,6 +4,7 @@ import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/services.dart';
 
 class CbnuAlramiWebview extends StatefulWidget {
   CbnuAlramiWebview({Key key}) : super(key: key);
@@ -49,6 +50,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
         name: 'baseApp',
         onMessageReceived: (JavascriptMessage message) {
             print(message.message);
+            Clipboard.setData(ClipboardData(text: message.message));
         });
   }
 }
