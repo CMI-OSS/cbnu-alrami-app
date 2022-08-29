@@ -63,28 +63,42 @@ packages:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.3"
+    version: "1.21.0"
   firebase_core_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "4.5.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1+1"
+    version: "1.7.1"
   firebase_messaging:
     dependency: "direct main"
     description:
       name: firebase_messaging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.3"
+    version: "12.0.3"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.2"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -100,6 +114,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_webview_pro:
+    dependency: "direct main"
+    description:
+      name: flutter_webview_pro
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1+3"
   get:
     dependency: "direct main"
     description:
@@ -148,14 +169,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.5"
+    version: "2.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -210,13 +224,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  webview_flutter:
-    dependency: "direct main"
+  webview_pro_android:
+    dependency: transitive
     description:
-      name: webview_flutter
+      name: webview_pro_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.14"
+    version: "2.8.3+3"
+  webview_pro_platform_interface:
+    dependency: transitive
+    description:
+      name: webview_pro_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.1+2"
+  webview_pro_wkwebview:
+    dependency: transitive
+    description:
+      name: webview_pro_wkwebview
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.7.1+2"
 sdks:
   dart: ">=2.17.0-0 <3.0.0"
   flutter: ">=2.5.0"
