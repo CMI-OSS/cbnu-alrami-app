@@ -1,3 +1,4 @@
+import 'package:cbnu_alrami_app/src/controller/dynamic_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
@@ -28,7 +29,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
     NotificationController nc = new NotificationController();
 
     return WebView(
-      initialUrl: 'https://dev-mobile.cmi.kro.kr', // 'https://dev-mobile.cmi.kro.kr'
+      initialUrl: 'http://10.0.2.2:3000', // 'https://dev-mobile.cmi.kro.kr'
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webviewController)  {
         _controller.complete(webviewController);
@@ -48,7 +49,11 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
     return JavascriptChannel(
         name: 'baseApp',
         onMessageReceived: (JavascriptMessage message) {
-            print(message.message);
+            if(message.message == 'deeplink') {
+              DynamicLink dl = new DynamicLink();
+              dl.getShortLink();
+              dl.initDynamicLinks();
+            }
         });
   }
 }

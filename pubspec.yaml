@@ -33,6 +33,7 @@ dependencies:
   get: ^3.24.0
   flutter_webview_pro: ^3.0.1+2
   firebase_core_platform_interface: 4.5.0
+  firebase_dynamic_links: ^4.3.5
 
 dev_dependencies:
   flutter_test:

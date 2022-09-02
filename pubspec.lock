@@ -78,6 +78,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.1"
+  firebase_dynamic_links:
+    dependency: "direct main"
+    description:
+      name: firebase_dynamic_links
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.5"
+  firebase_dynamic_links_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_dynamic_links_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3+11"
   firebase_messaging:
     dependency: "direct main"
     description:
