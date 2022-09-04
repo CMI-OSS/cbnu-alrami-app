@@ -48,11 +48,12 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
   JavascriptChannel _baseJavascript(BuildContext context) {
     return JavascriptChannel(
         name: 'baseApp',
-        onMessageReceived: (JavascriptMessage message) {
+        onMessageReceived: (JavascriptMessage message) async {
             if(message.message == 'deeplink') {
               DynamicLink dl = new DynamicLink();
-              dl.getShortLink();
-              dl.initDynamicLinks();
+              dl.addListener();
+              await dl.getShortLink();
+              _webViewController.loadUrl(dl.url);
             }
         });
   }
