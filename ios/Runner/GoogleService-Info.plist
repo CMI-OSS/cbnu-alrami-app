@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>185064806197-2k601j9ilfbvct8lg4dilj8p9kisq6i4.apps.googleusercontent.com</string>
+	<string>185064806197-27980r3vfd99vad77mmhpt7gu56ddouo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.185064806197-2k601j9ilfbvct8lg4dilj8p9kisq6i4</string>
+	<string>com.googleusercontent.apps.185064806197-27980r3vfd99vad77mmhpt7gu56ddouo</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDl8gjzcnKvMyguniIQ7Vw_JyvofDYENwA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.cbnu-alrami.app</string>
+	<string>com.cbnu-alrami.app2</string>
 	<key>PROJECT_ID</key>
 	<string>cmi-app-b3b92</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:185064806197:ios:f217d02b2369673d119e7c</string>
+	<string>1:185064806197:ios:e7a6c229e50bcc84119e7c</string>
 </dict>
 </plist>
