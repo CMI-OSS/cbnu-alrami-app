@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationController extends GetxController {
   static NotificationController get to => Get.find();
@@ -28,12 +27,7 @@ class NotificationController extends GetxController {
     } catch (e) {}
   }
 
-  Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
-    print("onBackgroundMessage: ${message.data}");
-    return Future.value();
-  }
-
-  void foregroundNotification(String title, String body) async {
+  void foregroundNotification(String title, String body, String payload) async {
      FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
      const AndroidInitializationSettings initializationSettingsAndroid =
@@ -42,13 +36,7 @@ class NotificationController extends GetxController {
      final InitializationSettings initializationSettings =
      InitializationSettings(android: initializationSettingsAndroid);
 
-     await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-         onSelectNotification: (String payload) async {
-           //onSelectNotification은 알림을 선택했을때 발생
-           if (payload != null) {
-             print('notification payload: $payload');
-           }
-        });
+     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
     const String groupKey = 'com.android.example.WORK_EMAIL';
     // 알림 채널
     const String groupChannelId = 'grouped channel id';
@@ -62,8 +50,7 @@ class NotificationController extends GetxController {
      AndroidNotificationDetails(
          groupChannelId, groupChannelName,
          importance: Importance.max,
-         priority: Priority.high,
-         groupKey: groupKey);
+         priority: Priority.high,);
 
      const NotificationDetails notificationPlatformSpecifics =
      NotificationDetails(android: notificationAndroidSpecifics);
@@ -72,7 +59,9 @@ class NotificationController extends GetxController {
          1234,
          title,
          body,
-         notificationPlatformSpecifics);
+         notificationPlatformSpecifics,
+         payload: payload
+     );
 
   }
   void _initNotification() async {
@@ -88,10 +77,13 @@ class NotificationController extends GetxController {
     print("-- request 성공 -- ");
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      RemoteNotification notification = message.notification;
-      print('foreground ${notification}');
+      dynamic payload = message.data['articleId'];
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.reload();
+      prefs.setString('url',
+          'https://dev-mobile.cmi.kro.kr/notice/' + message.data['articleId']);
 
-      foregroundNotification(message.notification.title, message.notification.body);
+      foregroundNotification(message.notification.title, message.notification.body, payload);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
