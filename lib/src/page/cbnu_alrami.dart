@@ -14,7 +14,7 @@ class CbnuAlramiWebview extends StatefulWidget {
   State<CbnuAlramiWebview> createState() => CbnuAlramiWebviewState();
 }
 
-class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
+class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> with WidgetsBindingObserver  {
   WebViewController _webViewController;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();

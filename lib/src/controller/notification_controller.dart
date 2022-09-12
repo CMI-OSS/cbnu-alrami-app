@@ -23,20 +23,20 @@ class NotificationController extends GetxController {
       String token = await _messaging.getToken();
       print('token ${token}');
       return token;
-
     } catch (e) {}
   }
 
   void foregroundNotification(String title, String body, String payload) async {
-     FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
 
-     const AndroidInitializationSettings initializationSettingsAndroid =
-     AndroidInitializationSettings('ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('ic_launcher');
 
-     final InitializationSettings initializationSettings =
-     InitializationSettings(android: initializationSettingsAndroid);
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
 
-     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
     const String groupKey = 'com.android.example.WORK_EMAIL';
     // 알림 채널
     const String groupChannelId = 'grouped channel id';
@@ -45,36 +45,38 @@ class NotificationController extends GetxController {
     // 채널 설명
     const String groupChannelDescription = 'grouped channel description';
 
-
     const AndroidNotificationDetails notificationAndroidSpecifics =
-     AndroidNotificationDetails(
-         groupChannelId, groupChannelName,
-         importance: Importance.max,
-         priority: Priority.high,);
+        AndroidNotificationDetails(
+      groupChannelId,
+      groupChannelName,
+      importance: Importance.max,
+      priority: Priority.high,
+    );
 
-     const NotificationDetails notificationPlatformSpecifics =
-     NotificationDetails(android: notificationAndroidSpecifics);
+    const NotificationDetails notificationPlatformSpecifics =
+        NotificationDetails(android: notificationAndroidSpecifics);
 
-     await _flutterLocalNotificationsPlugin.show(
-         1234,
-         title,
-         body,
-         notificationPlatformSpecifics,
-         payload: payload
-     );
-
+    await _flutterLocalNotificationsPlugin.show(
+        1234, title, body, notificationPlatformSpecifics,
+        payload: payload);
   }
+
   void _initNotification() async {
     await _messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true
-    );
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true);
     print("-- request 성공 -- ");
+
+    await _messaging.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       dynamic payload = message.data['articleId'];
@@ -83,7 +85,8 @@ class NotificationController extends GetxController {
       prefs.setString('url',
           'https://dev-mobile.cmi.kro.kr/notice/' + message.data['articleId']);
 
-      foregroundNotification(message.notification.title, message.notification.body, payload);
+      foregroundNotification(
+          message.notification.title, message.notification.body, payload);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
