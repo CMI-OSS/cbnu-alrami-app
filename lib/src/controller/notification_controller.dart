@@ -1,54 +1,57 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class NotificationController extends GetxController {
   static NotificationController get to => Get.find();
-  FirebaseMessaging _messaging = FirebaseMessaging();
+  FirebaseMessaging _messaging = FirebaseMessaging.instance;
   RxMap<String, dynamic> message = Map<String, dynamic>().obs;
+  WebViewController controller;
 
   @override
-  void onInit() {
+  void onInit() async {
     _initNotification();
-    _getToken();
+    getToken();
     super.onInit();
   }
 
-  Future<void> _getToken() async {
+  Future<String> getToken() async {
     try {
       String token = await _messaging.getToken();
-      print(token);
+      print('token ${token}');
+      return token;
+
     } catch (e) {}
   }
 
-  void _initNotification() {
-    _messaging.requestNotificationPermissions(const IosNotificationSettings(
-        sound: true, badge: true, alert: true, provisional: true));
-
-    _messaging.configure(
-      onMessage: _onMessage,
-      onLaunch: _onLaunch,
-      onResume: _onResume,
+  void _initNotification() async {
+    await _messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true
     );
-  }
+    print("-- request 성공 -- ");
 
-  Future<void> _onResume(Map<String, dynamic> message) {
-    print("_onResume : $message");
-    return null;
-  }
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification notification = message.notification;
+      print(notification);
+    });
 
-  Future<void> _onLaunch(Map<String, dynamic> message) {
-    print("_onLaunch : $message");
-    _actionOnNotification(message);
-    return null;
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("onMessageOpenedApp: $message");
+    });
+
+    /* FirebaseMessaging.onBackgroundMessage((RemoteMessage message) {
+      _actionOnNotification(message);
+    }); */
   }
 
   void _actionOnNotification(Map<String, dynamic> messageMap) {
     message(messageMap);
-  }
-
-  Future<void> _onMessage(Map<String, dynamic> message) {
-    print("_onMessage : $message");
-    return null;
   }
 }
