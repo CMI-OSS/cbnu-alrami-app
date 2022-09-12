@@ -29,6 +29,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
 
     return WebView(
       initialUrl: 'https://dev-mobile.cmi.kro.kr', // 'https://dev-mobile.cmi.kro.kr'
+      userAgent: Platform.isIOS? 'cbnu_alrami_ios': 'cbnu_alrami_android',
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webviewController)  {
         _controller.complete(webviewController);
