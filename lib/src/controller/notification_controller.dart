@@ -72,8 +72,7 @@ class NotificationController extends GetxController {
         sound: true);
     print("-- request 성공 -- ");
 
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
+    await _messaging.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
       badge: true,
       sound: true,
