@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:io';
@@ -22,6 +23,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
   void initState() {
     super.initState();
     // Enable virtual display.
+    WidgetsBinding.instance.addObserver(this);
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
@@ -73,5 +75,25 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> {
             print(message.message);
             Clipboard.setData(ClipboardData(text: message.message));
         });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.reload();
+      String url = prefs.getString("url");
+      prefs.remove('url');
+
+      this._webViewController.loadUrl(url);
+    }
+    super.didChangeAppLifecycleState(state);
   }
 }
