@@ -33,6 +33,8 @@ dependencies:
   get: ^3.24.0
   flutter_webview_pro: ^3.0.1+2
   firebase_core_platform_interface: 4.5.0
+  flutter_local_notifications: ^9.2.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
