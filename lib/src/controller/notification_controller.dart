@@ -78,7 +78,6 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       dynamic payload = message.data['articleId'];
       final prefs = await SharedPreferences.getInstance();
-      await prefs.reload();
       prefs.setString('url',
           'https://dev-mobile.cmi.kro.kr/notice/' + payload);
 
