@@ -5,25 +5,19 @@ import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:cbnu_alrami_app/src/page/message_page.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
   final prefs = await SharedPreferences.getInstance();
   print("onBackgroundMessage: ${message.data}");
-  await prefs.reload();
   prefs.setString('url',
       'https://dev-mobile.cmi.kro.kr/notice/' + message.data['articleId']);
-
-  return Future.value();
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(onBackgroundHandler);
-
   runApp(MyApp());
 }
 
@@ -34,14 +28,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: '충림이',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialBinding: BindingsBuilder(
-        () {
-          Get.put(NotificationController());
-        },
-      ),
+      initialBinding: HomeBinding(),
       home: Scaffold(
         body: Obx(() {
           if (NotificationController.to.message.isNotEmpty)
@@ -51,5 +40,12 @@ class MyApp extends StatelessWidget {
         }),
       ),
     );
+  }
+}
+
+class HomeBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.put(NotificationController());
   }
 }

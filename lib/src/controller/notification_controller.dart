@@ -37,13 +37,10 @@ class NotificationController extends GetxController {
         InitializationSettings(android: initializationSettingsAndroid);
 
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    const String groupKey = 'com.android.example.WORK_EMAIL';
     // 알림 채널
     const String groupChannelId = 'grouped channel id';
     // 채널 이름
     const String groupChannelName = 'grouped channel name';
-    // 채널 설명
-    const String groupChannelDescription = 'grouped channel description';
 
     const AndroidNotificationDetails notificationAndroidSpecifics =
         AndroidNotificationDetails(
@@ -81,9 +78,8 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       dynamic payload = message.data['articleId'];
       final prefs = await SharedPreferences.getInstance();
-      await prefs.reload();
       prefs.setString('url',
-          'https://dev-mobile.cmi.kro.kr/notice/' + message.data['articleId']);
+          'https://dev-mobile.cmi.kro.kr/notice/' + payload);
 
       foregroundNotification(
           message.notification.title, message.notification.body, payload);
