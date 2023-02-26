@@ -11,7 +11,7 @@ Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
   final prefs = await SharedPreferences.getInstance();
   print("onBackgroundMessage: ${message.data}");
   prefs.setString('url',
-      'https://dev-mobile.cmi.kro.kr/notice/' + message.data['articleId']);
+      'https://dev-mobile.cmi.kro.kr/article/detail' + message.data['articleId']);
 }
 
 void main() async {
