@@ -79,7 +79,7 @@ class NotificationController extends GetxController {
       dynamic payload = message.data['articleId'];
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('url',
-          'https://dev-mobile.cmi.kro.kr/article/detail' + payload);
+          'https://dev-mobile.cmiteam.kr/article/detail/' + payload);
 
       foregroundNotification(
           message.notification.title, message.notification.body, payload);
