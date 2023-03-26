@@ -56,5 +56,7 @@
 	<string>위치정보 권한이 필요합니다. (항상 위치정보를 수신합니다.)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>위치정보 권한이 필요합니다. (앱을 사용하는 동안에만 위치정보를 수신합니다.)</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
