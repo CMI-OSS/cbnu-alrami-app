@@ -83,16 +83,15 @@ class NotificationController extends GetxController {
     );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      dynamic payload = message.data['articleId'];
+      dynamic payload = message.data['url'];
 
       foregroundNotification(
           message.notification.title, message.notification.body, payload);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      dynamic payload = message.data['articleId'];
+      dynamic url = message.data['url'];
       final prefs = await SharedPreferences.getInstance();
-      final url = 'https://dev-mobile.cmiteam.kr/article/detail/' + payload;
       prefs.setString('url', url);
 
       moveUrl(url);
