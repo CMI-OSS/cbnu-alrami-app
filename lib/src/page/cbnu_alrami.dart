@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'dart:io';
@@ -13,7 +16,8 @@ class CbnuAlramiWebview extends StatefulWidget {
   State<CbnuAlramiWebview> createState() => CbnuAlramiWebviewState();
 }
 
-class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> with WidgetsBindingObserver  {
+class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
+    with WidgetsBindingObserver {
   WebViewController _webViewController;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -38,8 +42,8 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> with WidgetsBindin
             _controller.complete(webviewController);
             _webViewController = webviewController;
           },
-          initialUrl: 'https://dev-mobile.cmiteam.kr',
-          userAgent: Platform.isIOS? 'cbnu_alrami_ios': 'cbnu_alrami_android',
+          initialUrl: 'http://192.168.219.166:3000',
+          userAgent: Platform.isIOS ? 'cbnu_alrami_ios' : 'cbnu_alrami_android',
           javascriptMode: JavascriptMode.unrestricted,
           javascriptChannels: <JavascriptChannel>{
             _baseJavascript(context),
@@ -70,9 +74,21 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview> with WidgetsBindin
   JavascriptChannel _baseJavascript(BuildContext context) {
     return JavascriptChannel(
         name: 'baseApp',
-        onMessageReceived: (JavascriptMessage message) {
-            print(message.message);
-            Clipboard.setData(ClipboardData(text: message.message));
+        onMessageReceived: (JavascriptMessage message) async {
+          Map<String, dynamic> event = jsonDecode(message.message);
+
+          if (event['action'] == 'copy') {
+            Clipboard.setData(ClipboardData(text: event['url']));
+          }
+
+          if (event['action'] == 'image') {
+            var imageId = await ImageDownloader.downloadImage(event['url']);
+
+            if (event['preview'] == true) {
+              var path = await ImageDownloader.findPath(imageId);
+              await ImageDownloader.open(path);
+            }
+          }
         });
   }
 

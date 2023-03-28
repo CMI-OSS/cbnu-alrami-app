@@ -2,6 +2,7 @@
     package="com.cbnu_alrami.app">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name="${applicationName}"
         android:label="충림이"
@@ -48,5 +49,15 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+            <provider
+              android:name="com.ko2ic.imagedownloader.FileProvider"
+              android:authorities="${applicationId}.image_downloader.provider"
+              android:exported="false"
+              android:grantUriPermissions="true">
+          <meta-data
+                  android:name="android.support.FILE_PROVIDER_PATHS"
+                  android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 </manifest>
