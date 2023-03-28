@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
@@ -31,9 +32,13 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
+  void moveUrl(url) {
+    this._webViewController.loadUrl(url);
+  }
+
   @override
   Widget build(BuildContext context) {
-    NotificationController nc = new NotificationController();
+    NotificationController nc = new NotificationController(moveUrl);
 
     return WillPopScope(
       onWillPop: () => _goBack(context),

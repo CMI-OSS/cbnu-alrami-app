@@ -10,6 +10,13 @@ class NotificationController extends GetxController {
   FirebaseMessaging _messaging = FirebaseMessaging.instance;
   RxMap<String, dynamic> message = Map<String, dynamic>().obs;
   WebViewController controller;
+  Function moveUrl = () => {};
+
+  NotificationController(Function moveUrl) {
+    // See initializing formal parameters for a better way
+    // to initialize instance variables.
+    this.moveUrl = moveUrl;
+  }
 
   @override
   void onInit() async {
@@ -77,16 +84,18 @@ class NotificationController extends GetxController {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       dynamic payload = message.data['articleId'];
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('url',
-          'https://dev-mobile.cmiteam.kr/article/detail/' + payload);
 
       foregroundNotification(
           message.notification.title, message.notification.body, payload);
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("onMessageOpenedApp: $message");
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      dynamic payload = message.data['articleId'];
+      final prefs = await SharedPreferences.getInstance();
+      final url = 'https://dev-mobile.cmiteam.kr/article/detail/' + payload;
+      prefs.setString('url', url);
+
+      moveUrl(url);
     });
   }
 }

@@ -8,10 +8,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
-  final prefs = await SharedPreferences.getInstance();
-  print("onBackgroundMessage: ${message.data}");
-  prefs.setString('url',
-      'https://dev-mobile.cmiteam.kr/article/detail/' + message.data['articleId']);
+  // final prefs = await SharedPreferences.getInstance();
+  // print("onBackgroundMessage: ${message.data}");
+  // prefs.setString('url',
+  //     'https://dev-mobile.cmiteam.kr/article/detail/' + message.data['articleId']);
 }
 
 void main() async {
@@ -46,6 +46,6 @@ class MyApp extends StatelessWidget {
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(NotificationController());
+    Get.put(NotificationController(() => {}));
   }
 }
