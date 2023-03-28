@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CbnuAlramiWebview extends StatefulWidget {
   CbnuAlramiWebview({Key key}) : super(key: key);
@@ -87,6 +88,16 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
             if (event['preview'] == true) {
               var path = await ImageDownloader.findPath(imageId);
               await ImageDownloader.open(path);
+            }
+          }
+
+          if (event['action'] == 'navigate') {
+            var url = event['url'];
+
+            final uri = Uri.parse(url);
+
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(uri);
             }
           }
         });

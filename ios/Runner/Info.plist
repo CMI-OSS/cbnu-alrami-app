@@ -62,5 +62,10 @@
 	<string>사진 라이브러리 접근 권한이 필요합니다. (이미지 다운로드시 필요)</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>사진 라이브러리에 이미지 추가 접근 권한이 필요합니다. (이미지 다운로드시 필요)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+	</array>
 </dict>
 </plist>
