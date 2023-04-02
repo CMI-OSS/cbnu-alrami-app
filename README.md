@@ -31,6 +31,6 @@ pod install
 3. **Data 필드**
 ```json
 {
-  "articleId": "아티클 아이디"
+  "url": "webview에서 실행할 URL"
 }
 ```

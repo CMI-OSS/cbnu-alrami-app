@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
@@ -31,12 +33,18 @@ class NotificationController extends GetxController {
         FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
 
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    Future<void> handleNotificationClick(String payload) async {
+      setUrl(payload);
+    }
+
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: handleNotificationClick);
+
     // 알림 채널
     const String groupChannelId = 'grouped channel id';
     // 채널 이름
@@ -59,7 +67,7 @@ class NotificationController extends GetxController {
   }
 
   void _initNotification() async {
-    await _messaging.requestPermission(
+    NotificationSettings settings = await _messaging.requestPermission(
         alert: true,
         announcement: false,
         badge: true,
@@ -69,6 +77,15 @@ class NotificationController extends GetxController {
         sound: true);
     print("-- request 성공 -- ");
 
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+    }
+
     await _messaging.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
       badge: true,
@@ -76,17 +93,28 @@ class NotificationController extends GetxController {
     );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      dynamic payload = message.data['articleId'];
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('url',
-          'https://dev-mobile.cmiteam.kr/article/detail/' + payload);
+      dynamic payload = message.data['url'];
 
       foregroundNotification(
           message.notification.title, message.notification.body, payload);
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("onMessageOpenedApp: $message");
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      dynamic url = message.data['url'];
+
+      this.setUrl(url);
     });
+
+    _messaging
+      ..getInitialMessage().then((RemoteMessage message) {
+        dynamic url = message.data['url'];
+
+        this.setUrl(url);
+      });
+  }
+
+  void setUrl(url) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('url', url);
   }
 }
