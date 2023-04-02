@@ -30,15 +30,15 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
     // Enable virtual display.
     WidgetsBinding.instance.addObserver(this);
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
-  }
 
-  void moveUrl(url) {
-    this._webViewController.loadUrl(url);
+    Timer.periodic(new Duration(seconds: 1), (timer) {
+      this.loadUrl();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    NotificationController nc = new NotificationController(moveUrl);
+    NotificationController nc = new NotificationController();
 
     return WillPopScope(
       onWillPop: () => _goBack(context),
@@ -102,7 +102,10 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
             final uri = Uri.parse(url);
 
             if (await canLaunchUrl(uri)) {
-              await launchUrl(uri);
+              await launchUrl(
+                uri,
+                mode: LaunchMode.externalApplication,
+              );
             }
           }
         });
@@ -116,15 +119,20 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (state == AppLifecycleState.resumed) {
-      final prefs = await SharedPreferences.getInstance();
+    this.loadUrl();
+    super.didChangeAppLifecycleState(state);
+  }
 
-      await prefs.reload();
+  void loadUrl() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.reload();
+
+    if (prefs.containsKey('url')) {
       String url = prefs.getString("url");
       prefs.remove('url');
 
       this._webViewController.loadUrl(url);
     }
-    super.didChangeAppLifecycleState(state);
   }
 }

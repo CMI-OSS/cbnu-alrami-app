@@ -7,17 +7,10 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<dynamic> onBackgroundHandler(RemoteMessage message) async {
-  // final prefs = await SharedPreferences.getInstance();
-  // print("onBackgroundMessage: ${message.data}");
-  // prefs.setString('url',
-  //     'https://dev-mobile.cmiteam.kr/article/detail/' + message.data['articleId']);
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(onBackgroundHandler);
+
   runApp(MyApp());
 }
 
@@ -32,12 +25,14 @@ class MyApp extends StatelessWidget {
       ),
       initialBinding: HomeBinding(),
       home: Scaffold(
-        body: Obx(() {
-          if (NotificationController.to.message.isNotEmpty)
-            return MessageBox(); // 원하는 페이지 or 이벤트 처리
+        body: SafeArea(
+          child: Obx(() {
+            if (NotificationController.to.message.isNotEmpty)
+              return MessageBox(); // 원하는 페이지 or 이벤트 처리
 
-          return CbnuAlramiWebview();
-        }),
+            return CbnuAlramiWebview();
+          }),
+        ),
       ),
     );
   }
@@ -46,6 +41,6 @@ class MyApp extends StatelessWidget {
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(NotificationController(() => {}));
+    Get.put(NotificationController());
   }
 }
