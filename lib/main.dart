@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:cbnu_alrami_app/src/controller/notification_controller.dart';
 import 'package:cbnu_alrami_app/src/page/message_page.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  const backgroundColor = Colors.white;
+
+  Future.delayed(Duration(milliseconds: 1)).then(
+      (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            systemNavigationBarColor: backgroundColor,
+            systemNavigationBarDividerColor: backgroundColor,
+            systemNavigationBarIconBrightness: Brightness.light,
+            statusBarColor: backgroundColor,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.light,
+          )));
   runApp(MyApp());
 }
 
