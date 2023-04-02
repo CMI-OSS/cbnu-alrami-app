@@ -10,6 +10,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CbnuAlramiWebview extends StatefulWidget {
   CbnuAlramiWebview({Key key}) : super(key: key);
@@ -94,6 +95,11 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
               var path = await ImageDownloader.findPath(imageId);
               await ImageDownloader.open(path);
             }
+
+            Fluttertoast.showToast(
+              msg: "이미지가 다운로드 되었습니다.\n(갤러리에서 확인해주세요)",
+              gravity: ToastGravity.BOTTOM,
+            );
           }
 
           if (event['action'] == 'navigate') {
