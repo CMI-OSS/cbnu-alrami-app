@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cbnu_alrami_app/src/page/cbnu_alrami.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +14,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  const backgroundColor = Colors.white;
+  const backgroundColor = Colors.transparent;
 
-  Future.delayed(Duration(milliseconds: 1)).then(
-      (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            systemNavigationBarColor: backgroundColor,
-            systemNavigationBarDividerColor: backgroundColor,
-            systemNavigationBarIconBrightness: Brightness.light,
-            statusBarColor: backgroundColor,
-            statusBarBrightness: Brightness.light,
-            statusBarIconBrightness: Brightness.light,
-          )));
+  if (Platform.isIOS) {
+    Future.delayed(Duration(milliseconds: 1)).then(
+        (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+              systemNavigationBarColor: backgroundColor,
+              systemNavigationBarDividerColor: backgroundColor,
+              systemNavigationBarIconBrightness: Brightness.light,
+              statusBarColor: Colors.black,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.light,
+            )));
+  }
+
   runApp(MyApp());
 }
 
