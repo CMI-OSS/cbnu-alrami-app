@@ -49,7 +49,7 @@ class CbnuAlramiWebviewState extends State<CbnuAlramiWebview>
             _controller.complete(webviewController);
             _webViewController = webviewController;
           },
-          initialUrl: 'https://dev-mobile.cmiteam.kr',
+          initialUrl: 'https://mobile.cmiteam.kr',
           userAgent: Platform.isIOS ? 'cbnu_alrami_ios' : 'cbnu_alrami_android',
           javascriptMode: JavascriptMode.unrestricted,
           javascriptChannels: <JavascriptChannel>{
