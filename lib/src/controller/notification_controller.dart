@@ -33,7 +33,7 @@ class NotificationController extends GetxController {
         FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/ic_stat_cmi');
 
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
@@ -46,9 +46,9 @@ class NotificationController extends GetxController {
         onSelectNotification: handleNotificationClick);
 
     // 알림 채널
-    const String groupChannelId = 'grouped channel id';
+    const String groupChannelId = 'cbnu_alrami';
     // 채널 이름
-    const String groupChannelName = 'grouped channel name';
+    const String groupChannelName = '충림이';
 
     const AndroidNotificationDetails notificationAndroidSpecifics =
         AndroidNotificationDetails(
