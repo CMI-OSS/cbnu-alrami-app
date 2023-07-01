@@ -30,8 +30,19 @@
         android:label="충림이"
         android:usesCleartextTraffic="true" 
         android:icon="@mipmap/ic_launcher">
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_cmi" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/black" />
+
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -58,13 +69,6 @@
               android:name="com.google.firebase.messaging.default_notification_channel_id"
               android:value="@string/default_notification_channel_id" />
 
-              <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/ic_stat_cmi" />
-
-            <meta-data
-                android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@android:color/white" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
